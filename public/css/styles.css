@@ -1,0 +1,198 @@
+/* general styles */
+
+* {
+    font-family: sans-serif;
+}
+
+body {
+    background-image: linear-gradient(#009879, white);
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.btn {
+    background: none;
+    background-color: #009879;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.0em;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 15px;
+    border: 1px solid #006550;
+    outline: 0;
+}
+
+.btn:hover {
+    background-color: #00ab88;
+}
+
+.btn:active {
+    background-color: #004335;
+}
+
+/* music search form */
+
+form {
+    background: #aaddd2;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+form fieldset {
+    border: 0;
+}
+
+form p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.form-group label {
+    margin: 10px auto;
+    padding-right: 5px;
+    min-width: 50px;
+    display: inline-block;
+}
+
+.form-group input,
+.form-group select {
+    display: inline-block;
+    margin: 10px auto;
+    min-width: 380px;
+    line-height: 1.6em;
+    padding: 10px;
+    border: 1px solid #006550;
+    border-radius: 5px;
+}
+
+.form-group select {
+    min-width: 402px;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0, 0 100, 0 50, 50" style="fill:%23666666" /></svg>');
+    background-position: right 10px top 50%;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    padding-right: 30px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border: 1px solid #00211a;
+    box-shadow: 0 0 0.2rem rgba(0, 101, 80, 0.9);
+}
+
+.buttons-container {
+    text-align: center;
+}
+
+form .btn {
+    margin: 0 auto;
+}
+
+#searchCriteriaModal {
+    display: none;
+    text-align: center;
+}
+
+/* covers section */
+
+#coversSection {
+    margin-top: 10px;
+    display: flex;
+}
+
+#coversSection div {
+    margin: 0 auto;
+}
+
+#coversContainer img {
+    max-width: 150px;
+    max-height: 150px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+}
+
+#coversContainer {
+    max-width: 900px;
+    text-align: center;
+}
+
+/* songs table */
+
+#songsTable {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 1200px;
+    margin: 10px auto;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    table-layout: fixed;
+    display: none;
+}
+
+#songsTable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+#songsTable th,
+#songsTable td {
+    padding: 10px 15px;
+}
+
+#songsTable td .btn {
+    margin: 0 5px;
+}
+
+#songsTable th:last-child,
+#songsTable td:last-child {
+    width: 150px;
+}
+
+#songsTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+#songsTable tbody tr:nth-of-type(odd) {
+    background-color: #ffffff;
+}
+
+#songsTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+#songsTable tbody tr:hover {
+    background-color: #c6e8e1;
+}
+
+#songsTable tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+#songsTable span.fa {
+    color: orange;
+}
+
+@media screen and (max-width: 962px) {
+    #songsTable {
+        min-width: 800px;
+    }
+}
+
+#downloadModal {
+    display: none;
+    text-align: center;
+}

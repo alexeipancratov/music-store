@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel ="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity ="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+    <title>Music Store</title>
+</head>
+<body>
+    <div class="wrapper">
+        <section>
+            <form>
+                <p>Music Search</p>
+                <fieldset>
+                    <div class="form-group">
+                        <label for="artist">Artist:</label>
+                        <input id="artist" type="text" placeholder="Enter the Artist Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="song">Song:</label>
+                        <input id="song" type="text" placeholder="Enter the Song Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre:</label>
+                        <select name="genre" id="genre">
+                            <option disabled value selected>Select a genre</option>
+                            <option value="dance">Dance/Electronic</option>
+                            <option value="hiphop">Hip-Hop/Rap</option>
+                            <option value="rock">Rock</option>
+                        </select>
+                    </div>
+                    <div class="buttons-container">
+                        <button id="searchBtn" class="btn" type="submit"><i class="fas fa-search"></i> Search</button>
+                        <button class="btn" type="reset"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                </fieldset>
+                <div id="searchCriteriaModal" title="Warning">
+                    <p><i class="fas fa-exclamation-triangle"></i> Please enter search criteria</p>
+                </div>
+            </form>
+        </section>
+        <section id="coversSection">
+            <div id="coversContainer"></div>
+        </section>
+        <section id="searchResults">
+            <table id="songsTable">
+                <thead>
+                    <tr>
+                        <th>Artist</th>
+                        <th>Song</th>
+                        <th>Time</th>
+                        <th>Album</th>
+                        <th>Rating</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div id="downloadModal" title="Download completed">
+                <p><i class="fas fa-check-circle"></i> Your files have been downloaded successfully...</p>
+            </div>
+        </section>
+    </div>
+    <script src="assets/js/utilities.js"></script>
+    <script src="assets/js/localstorageUtilities.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
