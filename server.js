@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const musicFactory = require('./modules/musicFactory');
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 const port = 3000;
 
@@ -33,6 +35,20 @@ app.post('/download', (req, res) => {
   res.send(`Download song with Id ${id}`);
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`server started listening on port: ${port}`);
+});
+
+io.on('connection', (socket) => {
+  console.log('SOCKET - Connection accepted.');
+
+  socket.on('download', (id) => {
+    console.log(`Received client message to download music id: ${id}`);
+
+    socket.emit('download-received', id);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('SOCKET - Disconnected.');
+  });
 });

@@ -11,48 +11,63 @@ class Song {
 }
 
 const serverUrl = 'http://localhost:3000';
+const socket = io.connect('http://localhost:3000');
 
 (function () {
-  document.getElementById('searchBtn').onclick = function(e) {
-    e.preventDefault();
+  document.getElementById('searchBtn').onclick = searchMusic;
+  
+  socket.on('connect', () => {
+    console.log('SOCKET - connected');
+  });
 
-    const artist = document.getElementById('artist').value;
-    const songTitle = document.getElementById('song').value;
-    const genre = document.getElementById('genre').value;
+  socket.on('disconnect', () => {
+    console.log('SOCKET - disconnected');
+  });
 
-    if (!artist && !songTitle && !genre) {
-      $('#searchCriteriaModal').dialog({
-        modal: true,
-        resizable: false,
-        buttons: [
-          {
-            text: 'OK',
-            click: function() {
-              $(this).dialog('close');
-            }
-          }
-        ]
-      });
-      return;
-    }
-
-    const songsTable = document.getElementById('songsTable');
-
-    // remove previous songs.
-    document.querySelector('#songsTable tbody').remove();
-    songsTable.appendChild(document.createElement('tbody'));
-
-    // fetch songs.
-    const url = new URL(`${serverUrl}/filterMusic`);
-    url.searchParams.append('artist', artist);
-    url.searchParams.append('songTitle', songTitle);
-    url.searchParams.append('genre', genre);
-
-    fetch(url)
-      .then(res => res.json())
-      .then(foundSongs => processFoundSongs(foundSongs, songsTable));
-  };
+  socket.on('download-received', (id) => {
+    console.log(`SOCKET - download received from server with id: ${id}`);
+  });
 })();
+
+function searchMusic(e) {
+  e.preventDefault();
+
+  const artist = document.getElementById('artist').value;
+  const songTitle = document.getElementById('song').value;
+  const genre = document.getElementById('genre').value;
+
+  if (!artist && !songTitle && !genre) {
+    $('#searchCriteriaModal').dialog({
+      modal: true,
+      resizable: false,
+      buttons: [
+        {
+          text: 'OK',
+          click: function() {
+            $(this).dialog('close');
+          }
+        }
+      ]
+    });
+    return;
+  }
+
+  const songsTable = document.getElementById('songsTable');
+
+  // remove previous songs.
+  document.querySelector('#songsTable tbody').remove();
+  songsTable.appendChild(document.createElement('tbody'));
+
+  // fetch songs.
+  const url = new URL(`${serverUrl}/filterMusic`);
+  url.searchParams.append('artist', artist);
+  url.searchParams.append('songTitle', songTitle);
+  url.searchParams.append('genre', genre);
+
+  fetch(url)
+    .then(res => res.json())
+    .then(foundSongs => processFoundSongs(foundSongs, songsTable));
+};
 
 function processFoundSongs(songs, songsTable) {
   if (songs.length > 0) {
@@ -151,6 +166,8 @@ function getButtonsCell(songId) {
       modal: true,
       resizable: false
     });
+
+    socket.emit('download', songId);
   };
 
   // download button icon
