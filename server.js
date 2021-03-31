@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const SocketEvent = require('./mongoModels/SocketEvent');
 const DownloadEvent = require('./mongoModels/DownloadEvent');
 
+const searchRouter = require('./routes/searchRouter')(musicFactory);
+
 const port = 3000;
 const connectionString = 'mongodb://mongoadmin:secret@localhost:27888/AlexDB?authSource=admin&readPreference=primary&ssl=false';
 
@@ -26,17 +28,7 @@ app.get('/musicData', (_, res) => {
   res.json(musicFactory.getMusicData());
 });
 
-app.get('/filterMusic', (req, res) => {
-  res.json(musicFactory.fitlerMusic(
-    req.query.artist,
-    req.query.songTitle,
-    req.query.album,
-    req.query.genre));
-});
-
-app.get('/favorite', (req, res) => {
-  res.json(musicFactory.addFavorite(req.query.id));
-});
+app.use('/search', searchRouter);
 
 app.post('/download', (req, res) => {
   const id = req.query.id;

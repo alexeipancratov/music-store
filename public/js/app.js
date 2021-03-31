@@ -59,7 +59,7 @@ function searchMusic(e) {
   songsTable.appendChild(document.createElement('tbody'));
 
   // fetch songs.
-  const url = new URL(`${serverUrl}/filterMusic`);
+  const url = new URL(`${serverUrl}/search/filterMusic`);
   url.searchParams.append('artist', artist);
   url.searchParams.append('songTitle', songTitle);
   url.searchParams.append('genre', genre);
@@ -191,7 +191,7 @@ function addToFavorites(songId) {
     }
   }
 
-  const url = new URL(`${serverUrl}/favorite`);
+  const url = new URL(`${serverUrl}/search/favorite`);
   url.searchParams.append('id', songId);
 
   fetch(url)
