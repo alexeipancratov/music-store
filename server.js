@@ -11,7 +11,7 @@ const DownloadEvent = require('./mongoModels/DownloadEvent');
 const searchRouter = require('./routes/searchRouter')(musicFactory);
 
 const port = 3000;
-const connectionString = 'mongodb://mongoadmin:secret@localhost:27888/AlexDB?authSource=admin&readPreference=primary&ssl=false';
+const connectionString = 'mongodb+srv://admin:j9VF7pzwxvHaW5r@cluster0.n6zrt.mongodb.net/AlexDB?retryWrites=true&w=majority';
 
 mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(
