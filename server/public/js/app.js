@@ -10,8 +10,8 @@ class Song {
   }
 }
 
-const serverUrl = 'http://localhost:3000';
-const socket = io.connect('http://localhost:3000');
+const serverUrl = 'http://localhost:3001';
+const socket = io.connect('http://localhost:3001');
 
 (function () {
   document.getElementById('searchBtn').onclick = searchMusic;

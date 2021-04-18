@@ -10,7 +10,7 @@ const DownloadEvent = require('./mongoModels/DownloadEvent');
 
 const searchRouter = require('./routes/searchRouter')(musicFactory);
 
-const port = 3000;
+const port = 3001;
 const connectionString = 'mongodb+srv://admin:j9VF7pzwxvHaW5r@cluster0.n6zrt.mongodb.net/AlexDB?retryWrites=true&w=majority';
 
 mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -36,6 +36,27 @@ app.post('/download', (req, res) => {
   musicFactory.downloadSong(id);
   res.send(`Download song with Id ${id}`);
 });
+
+app.get('/downloadHistory', (_, res) => {
+  DownloadEvent.find(null, (err, events) => {
+    if (err) {
+      return res.send(err);
+    }
+
+    return res.json(events);
+  });
+});
+
+app.get('/eventHistory', (_, res) => {
+  SocketEvent.find(null, (err, events) => {
+    if (err) {
+      return res.send(err);
+    }
+
+    return res.json(events);
+  });
+});
+
 
 server.listen(port, () => {
   console.log(`server started listening on port: ${port}`);
