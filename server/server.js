@@ -20,6 +20,12 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: 
 
 app.use('/assets', express.static(__dirname + '/public'));
 
+app.use((_, res, next) => {
+  next();
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+});
+
 app.get('/', (_, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
@@ -56,7 +62,6 @@ app.get('/eventHistory', (_, res) => {
     return res.json(events);
   });
 });
-
 
 server.listen(port, () => {
   console.log(`server started listening on port: ${port}`);
