@@ -21,9 +21,12 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: 
 app.use('/assets', express.static(__dirname + '/public'));
 
 app.use((_, res, next) => {
-  next();
-
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Headers', 'content-type');
+
+  next();
 });
 
 app.get('/', (_, res) => {
@@ -60,6 +63,12 @@ app.get('/eventHistory', (_, res) => {
     }
 
     return res.json(events);
+  });
+});
+
+app.post('/authenticate', (req, res) => {
+  res.json({
+    token: '12345'
   });
 });
 
