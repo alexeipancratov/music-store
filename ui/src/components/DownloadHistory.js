@@ -16,9 +16,10 @@ class DownloadHistory extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="col-md">
         <Navigation />
-        <table id="historyTable">
+        <h2>Download History</h2>
+        <table id="historyTable" className="table table-hover">
           <thead>
             <tr>
               <th>ID</th>

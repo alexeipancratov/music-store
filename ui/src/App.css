@@ -13,14 +13,6 @@
 }
 
 /* my styles */
-nav a {
-  padding: 5px;
-  margin: 0 10px;
-  border: 1px solid black;
-  color: white;
-  text-decoration: none;
-}
-
 #historyTable {
   margin-top: 50px;
   min-width: 970px;
