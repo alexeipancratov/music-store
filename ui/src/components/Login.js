@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Login = (props) => {
+const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,7 +12,7 @@ const Login = (props) => {
       username: username,
       password: password
     }).then(
-      _ => props.history.push('/eventHistory'),
+      res => onLogin(res.data.token),
       err => console.log(err)
     );
   };
