@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Navigation from './Navigation';
 
 class DownloadHistory extends React.Component {
   state = {
@@ -16,6 +17,7 @@ class DownloadHistory extends React.Component {
   render() {
     return (
       <div>
+        <Navigation />
         <table id="historyTable">
           <thead>
             <tr>

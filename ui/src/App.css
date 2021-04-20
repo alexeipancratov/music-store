@@ -26,3 +26,9 @@ nav a {
   min-width: 970px;
   text-align: left;
 }
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

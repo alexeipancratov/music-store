@@ -3,17 +3,18 @@ import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import DownloadHistory from './components/DownloadHistory';
 import EventHistory from './components/EventHistory';
-import Navigation from "./components/Navigation";
+import Login from "./components/Login";
+import history from "./History";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <div className="App">
         <header className="App-header">
-          <Navigation />
           <Switch>
-            <Route path="/" component={EventHistory} exact />
-            <Route path="/downloadhistory" component={DownloadHistory} exact />
+            <Route path="/" component={Login} exact />
+            <Route path="/eventhistory" component={EventHistory} />
+            <Route path="/downloadhistory" component={DownloadHistory} />
           </Switch>
         </header>
       </div>
