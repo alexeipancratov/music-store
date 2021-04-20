@@ -4,6 +4,7 @@ const musicFactory = require('./modules/musicFactory');
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const SocketEvent = require('./mongoModels/SocketEvent');
 const DownloadEvent = require('./mongoModels/DownloadEvent');
@@ -18,16 +19,9 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: 
     () => console.log('Mongoose connected successfully'),
     (err) => console.log('Mongoose could not connect to database ' + err));
 
+app.use(cors());
+
 app.use('/assets', express.static(__dirname + '/public'));
-
-app.use((_, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Headers', 'content-type');
-
-  next();
-});
 
 app.get('/', (_, res) => {
   res.sendFile(__dirname + '/public/index.html');
