@@ -11,6 +11,7 @@ function App() {
   const [token, setToken] = useState();
 
   const onSuccessfullLogin = (token) => {
+    history.push('/eventhistory');
     setToken(token);
   };
 
