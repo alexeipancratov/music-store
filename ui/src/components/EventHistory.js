@@ -19,7 +19,7 @@ class EventHistory extends React.Component {
       <div className="col-md">
         <Navigation />
         <h2>Event History</h2>
-        <table id="historyTable" className="table table-hover">
+        <table className="history-table">
           <thead>
             <tr>
               <th>Type</th>
