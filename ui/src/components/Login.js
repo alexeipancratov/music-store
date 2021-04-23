@@ -16,7 +16,7 @@ const Login = ({ onLogin }) => {
         password: password,
       })
       .then(
-        (res) => onLogin(res.data.token),
+        (res) => onLogin(res.data),
         (err) => {
           setAuthError(err.response.data.message);
         }

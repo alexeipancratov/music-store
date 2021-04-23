@@ -5,17 +5,20 @@ import "./App.css";
 import DownloadHistory from "./components/DownloadHistory";
 import EventHistory from "./components/EventHistory";
 import Login from "./components/Login";
+import Navigation from "./components/Navigation";
 import history from "./History";
 
 function App() {
-  const [token, setToken] = useState();
+  const [authData, setAuthData] = useState({});
 
-  const onSuccessfullLogin = (token) => {
-    history.push('/eventhistory');
-    setToken(token);
+  const onSuccessfullLogin = (authResult) => {
+    history.push("/eventhistory");
+    setAuthData(authResult);
   };
 
-  if (!token) {
+  const onLogout = () => setAuthData({});
+
+  if (!authData.token) {
     return <Login onLogin={onSuccessfullLogin} />;
   }
 
@@ -23,10 +26,13 @@ function App() {
     <BrowserRouter history={history}>
       <div className="container">
         <div className="row">
-          <Switch>
-            <Route path="/eventhistory" component={EventHistory} />
-            <Route path="/downloadhistory" component={DownloadHistory} />
-          </Switch>
+          <div className="col-md">
+            <Navigation onLogout={onLogout} username={authData.username} />
+            <Switch>
+              <Route path="/eventhistory" component={EventHistory} />
+              <Route path="/downloadhistory" component={DownloadHistory} />
+            </Switch>
+          </div>
         </div>
       </div>
     </BrowserRouter>

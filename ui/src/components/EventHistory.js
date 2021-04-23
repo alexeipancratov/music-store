@@ -16,8 +16,7 @@ class EventHistory extends React.Component {
 
   render() {
     return (
-      <div className="col-md">
-        <Navigation />
+      <>
         <h2>Event History</h2>
         <table className="history-table">
           <thead>
@@ -41,7 +40,7 @@ class EventHistory extends React.Component {
             )}
           </tbody>
         </table>
-      </div>
+      </>
     );
   }
 }

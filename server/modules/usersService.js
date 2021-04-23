@@ -18,7 +18,8 @@ const authenticateUser = ({ username, password}) => {
     .then(u => {
       if (bcrypt.compareSync(password, u.password)) {
         return resolve({
-          token: jwt.sign({ sub: u._id }, config.jwtSecret, { expiresIn: '15m' })
+          token: jwt.sign({ sub: u._id }, config.jwtSecret, { expiresIn: '15m' }),
+          username: u.username
         });
       } else {
         return resolve({ message: 'Invalid username or password.' });
