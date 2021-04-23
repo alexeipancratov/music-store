@@ -10,6 +10,7 @@ const SocketEvent = require('./mongoModels/SocketEvent');
 const DownloadEvent = require('./mongoModels/DownloadEvent');
 
 const searchRouter = require('./routes/searchRouter')(musicFactory);
+const usersRouter = require('./routes/usersRouter')();
 
 const port = 3001;
 const connectionString = 'mongodb+srv://admin:j9VF7pzwxvHaW5r@cluster0.n6zrt.mongodb.net/AlexDB?retryWrites=true&w=majority';
@@ -20,6 +21,7 @@ mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: 
     (err) => console.log('Mongoose could not connect to database ' + err));
 
 app.use(cors());
+app.use(express.json());
 
 app.use('/assets', express.static(__dirname + '/public'));
 
@@ -60,11 +62,7 @@ app.get('/eventHistory', (_, res) => {
   });
 });
 
-app.post('/authenticate', (req, res) => {
-  res.json({
-    token: '12345'
-  });
-});
+app.use('/users', usersRouter);
 
 server.listen(port, () => {
   console.log(`server started listening on port: ${port}`);

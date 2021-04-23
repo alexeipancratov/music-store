@@ -1,18 +1,9 @@
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
+/* general styles */
+.offset-top {
+  margin-top: 15px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-/* my styles */
+/* Download History and Event History */
 .history-table {
   margin-top: 50px;
   min-width: 970px;
@@ -67,10 +58,4 @@
 
 .history-table span.fa {
   color: orange;
-}
-
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
