@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import Navigation from './Navigation';
 
 class DownloadHistory extends React.Component {
   state = {

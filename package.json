@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  },
+  "author": {
+    "name": "Alexei Pancratov"
+  },
+  "description": "Music Store Application based on Node.JS and React",
+  "scripts": {
+    "start": "concurrently \"cd server && nodemon server\" \" cd ui && npm start\""
+  }
+}
