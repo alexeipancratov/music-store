@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import authService from "../services/authService";
 
 class DownloadHistory extends React.Component {
   state = {
@@ -7,7 +8,10 @@ class DownloadHistory extends React.Component {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:3001/downloadHistory')
+    const options = {
+      headers: { 'Authorization': `bearer ${authService.getAuthData()?.token}` }
+    };
+    axios.get('http://localhost:3001/downloadHistory', options)
       .then(
         (res) => this.setState({ downloads: res.data }),
         (error) => console.log(error));

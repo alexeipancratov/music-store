@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Switch, Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
@@ -7,9 +6,10 @@ import EventHistory from "./components/EventHistory";
 import Login from "./components/Login";
 import Navigation from "./components/Navigation";
 import history from "./History";
+import useAuthData from "./customHooks/useAuthData";
 
 function App() {
-  const [authData, setAuthData] = useState({});
+  const [authData, setAuthData] = useAuthData();
 
   const onSuccessfullLogin = (authResult) => {
     history.push("/eventhistory");
@@ -18,7 +18,7 @@ function App() {
 
   const onLogout = () => setAuthData({});
 
-  if (!authData.token) {
+  if (!authData?.token) {
     return <Login onLogin={onSuccessfullLogin} />;
   }
 

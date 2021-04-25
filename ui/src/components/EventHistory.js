@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import authService from "../services/authService";
 
 class EventHistory extends React.Component {
   state = {
@@ -7,7 +8,10 @@ class EventHistory extends React.Component {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:3001/eventHistory')
+    const options = {
+      headers: { 'Authorization': `bearer ${authService.getAuthData()?.token}` }
+    };
+    axios.get('http://localhost:3001/eventHistory', options)
       .then(
         (res) => this.setState({ events: res.data }),
         (error) => console.log(error));
