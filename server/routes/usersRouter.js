@@ -1,4 +1,8 @@
 const express = require('express');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+
+const config = require('../config.json');
 const usersService = require('../modules/usersService');
 
 function createUsersRouter() {
@@ -14,14 +18,20 @@ function createUsersRouter() {
   });
 
   usersRouter.post('/authenticate', (req, res) => {
-    usersService.authenticateUser({
-      username: req.body.username,
-      password: req.body.password
-    })
-      .then(authResult => authResult.token
-        ? res.status(200).json(authResult)
-        : res.status(400).json({ message: authResult.message }))
-      .catch(err => res.status(400).json(err))
+    passport.authenticate('local', {session: false}, (err, user, info) => {
+      if (err) {
+        return res.status(400).json({message: 'Something went wrong.', error: err});
+      }
+
+      if (!user) {
+        return res.status(400).json(info);
+      }
+
+      return res.status(200).json({
+        token: jwt.sign({ sub: user._id }, config.jwtSecret, { expiresIn: "15m" }),
+        username: user.username
+      });
+    })(req, res);
   });
 
   return usersRouter;

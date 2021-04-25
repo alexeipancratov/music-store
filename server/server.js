@@ -5,12 +5,14 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const mongoose = require('mongoose');
 const cors = require('cors');
+const passport = require('passport');
 
 const SocketEvent = require('./mongoModels/SocketEvent');
 const DownloadEvent = require('./mongoModels/DownloadEvent');
 
 const searchRouter = require('./routes/searchRouter')(musicFactory);
 const usersRouter = require('./routes/usersRouter')();
+require('./passport');
 
 const port = 3001;
 const connectionString = 'mongodb+srv://admin:j9VF7pzwxvHaW5r@cluster0.n6zrt.mongodb.net/AlexDB?retryWrites=true&w=majority';
@@ -42,7 +44,7 @@ app.post('/download', (req, res) => {
   res.send(`Download song with Id ${id}`);
 });
 
-app.get('/downloadHistory', (_, res) => {
+app.get('/downloadHistory', passport.authenticate('jwt', {session: false}), (_, res) => {
   DownloadEvent.find(null, (err, events) => {
     if (err) {
       return res.send(err);
@@ -52,7 +54,7 @@ app.get('/downloadHistory', (_, res) => {
   });
 });
 
-app.get('/eventHistory', (_, res) => {
+app.get('/eventHistory', passport.authenticate('jwt', {session: false}), (_, res) => {
   SocketEvent.find(null, (err, events) => {
     if (err) {
       return res.send(err);
