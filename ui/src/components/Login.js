@@ -35,7 +35,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="login-container col-md">
-      <h2>Log In</h2>
+      <h2>Admin Login</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>
@@ -63,7 +63,7 @@ const Login = ({ onLogin }) => {
             onChange={onPasswordChange}
           />
         </div>
-        <div>
+        <div className="align-center-horizontal">
           <button type="submit" className="btn btn-primary">
             Log In
           </button>

@@ -13,7 +13,8 @@ function createAdminRouter() {
       }
   
       return res.json(events);
-    });
+    })
+    .limit(1000);
   });
   
   adminRouter.get('/eventHistory', passport.authenticate('jwt', {session: false}), (_, res) => {
@@ -23,7 +24,8 @@ function createAdminRouter() {
       }
   
       return res.json(events);
-    });
+    })
+    .limit(1000);
   });
 
   return adminRouter;

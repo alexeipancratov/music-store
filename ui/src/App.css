@@ -3,6 +3,10 @@
   margin-top: 15px;
 }
 
+.align-center-horizontal {
+  text-align: center;
+}
+
 /* Download History and Event History */
 .history-table {
   margin-top: 50px;

@@ -11,7 +11,7 @@ class DownloadHistory extends React.Component {
     const options = {
       headers: { 'Authorization': `bearer ${authService.getAuthData()?.token}` }
     };
-    axios.get('http://localhost:3001/admin/downloadHistory', options)
+    axios.get('/admin/downloadHistory', options)
       .then(
         (res) => this.setState({ downloads: res.data }),
         (error) => console.log(error));
