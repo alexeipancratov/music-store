@@ -1,3 +1,5 @@
+MERN stack-based music store application 
+
 To run project:
 
 1. npm install in the root directory
@@ -5,5 +7,5 @@ To run project:
 3. cd /ui -> npm install
 4. npm start from the root folder
 
-Default user:
+Default admin application user:
   - admin/admin
