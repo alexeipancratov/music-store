@@ -11,7 +11,7 @@ class EventHistory extends React.Component {
     const options = {
       headers: { 'Authorization': `bearer ${authService.getAuthData()?.token}` }
     };
-    axios.get('http://localhost:3001/eventHistory', options)
+    axios.get('http://localhost:3001/admin/eventHistory', options)
       .then(
         (res) => this.setState({ events: res.data }),
         (error) => console.log(error));
