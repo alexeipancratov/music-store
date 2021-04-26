@@ -13,7 +13,7 @@ const EventHistory = () => {
       (res) => setEvents(res.data),
       (error) => console.log(error)
     );
-  });
+  }, []);
 
   return (
     <>
