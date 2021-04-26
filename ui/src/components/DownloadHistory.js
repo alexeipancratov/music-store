@@ -1,26 +1,28 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import authService from "../services/authService";
 
-class DownloadHistory extends React.Component {
-  state = {
-    downloads: []
-  };
+const DownloadHistory = () => {
+  const [downloads, setDownloads] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     const options = {
-      headers: { 'Authorization': `bearer ${authService.getAuthData()?.token}` }
+      headers: { Authorization: `bearer ${authService.getAuthData()?.token}` },
     };
-    axios.get('/admin/downloadHistory', options)
-      .then(
-        (res) => this.setState({ downloads: res.data }),
-        (error) => console.log(error));
-  }
+    axios.get("/admin/downloadHistory", options).then(
+      (res) => setDownloads(res.data),
+      (error) => console.log(error)
+    );
+  }, []);
 
-  render() {
-    return (
-      <>
-        <h2>Download History</h2>
+  return (
+    <>
+      <h2>Download History</h2>
+      {!downloads.length ? (
+        <div className="align-center-horizontal">
+          <div className="loader"></div>
+        </div>
+      ) : (
         <table className="history-table">
           <thead>
             <tr>
@@ -32,7 +34,7 @@ class DownloadHistory extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.downloads.map(d =>
+            {downloads.map((d) => (
               <tr key={d._id}>
                 <td>{d._id}</td>
                 <td>{new Date(d.downloadTime).toLocaleDateString()}</td>
@@ -40,12 +42,12 @@ class DownloadHistory extends React.Component {
                 <td>{d.songId}</td>
                 <td>{d.socket}</td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
-      </>
-    );
-  }
-}
+      )}
+    </>
+  );
+};
 
 export default DownloadHistory;

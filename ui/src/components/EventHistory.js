@@ -1,26 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import authService from "../services/authService";
 
-class EventHistory extends React.Component {
-  state = {
-    events: []
-  };
+const EventHistory = () => {
+  const [events, setEvents] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     const options = {
-      headers: { 'Authorization': `bearer ${authService.getAuthData()?.token}` }
+      headers: { Authorization: `bearer ${authService.getAuthData()?.token}` },
     };
-    axios.get('/admin/eventHistory', options)
-      .then(
-        (res) => this.setState({ events: res.data }),
-        (error) => console.log(error));
-  }
+    axios.get("/admin/eventHistory", options).then(
+      (res) => setEvents(res.data),
+      (error) => console.log(error)
+    );
+  });
 
-  render() {
-    return (
-      <>
-        <h2>Event History</h2>
+  return (
+    <>
+      <h2>Event History</h2>
+      {!events.length ? (
+        <div className="align-center-horizontal">
+          <div className="loader"></div>
+        </div>
+      ) : (
         <table className="history-table">
           <thead>
             <tr>
@@ -32,7 +34,7 @@ class EventHistory extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.events.map(e =>
+            {events.map((e) => (
               <tr key={e._id}>
                 <td>{e.type}</td>
                 <td>{new Date(e.eventTime).toLocaleDateString()}</td>
@@ -40,12 +42,12 @@ class EventHistory extends React.Component {
                 <td>{e._id}</td>
                 <td>{e.socket}</td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
-      </>
-    );
-  }
-}
+      )}
+    </>
+  );
+};
 
 export default EventHistory;
