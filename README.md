@@ -23,6 +23,7 @@ The Admin web app allows to see the history of websocket connect/disconnect even
 ### Client facing web app
 * Node.js + Express
 * Websockets communication (using Socket.io)
+* MongoDB
 * Plain JS
 * CSS
 * HTML5
@@ -30,6 +31,7 @@ The Admin web app allows to see the history of websocket connect/disconnect even
 ### Admin web app
 * Node.js + Express
 * Websockets communication (using Socket.io)
+* MongoDB
 * React
 * Bootstrap
 * HTML5
