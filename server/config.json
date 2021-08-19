@@ -1,5 +1,5 @@
 {
     "jwtSecret": "mOprl3rUwrIw0_m@@HA+",
     "serverPort": 3001,
-    "connectionString": "mongodb+srv://admin:j9VF7pzwxvHaW5r@cluster0.n6zrt.mongodb.net/AlexDB?retryWrites=true&w=majority"
+    "connectionString": ""
 }
